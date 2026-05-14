@@ -10,6 +10,7 @@
         "files": [
           "/favicon.svg",
           "/icons/*.svg",
+          "/icons/*.png",
           "/manifest.webmanifest",
           "/index.html",
           "/index.csr.html",
