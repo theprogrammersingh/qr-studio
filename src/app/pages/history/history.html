@@ -1,0 +1,52 @@
+<div class="container">
+  <header class="page-header">
+    <p class="page-header__crumbs">
+      <a routerLink="/">~/</a>
+      <span aria-hidden="true">/</span>
+      <span>history</span>
+    </p>
+    <h1>History</h1>
+    <p class="page-header__lede">
+      Your most recent codes — generated and scanned. Stored on this device only.
+    </p>
+  </header>
+
+  <nav class="tabs" aria-label="History view">
+    <button
+      type="button"
+      class="tabs__btn"
+      [class.is-active]="tab() === 'generated'"
+      [attr.aria-pressed]="tab() === 'generated'"
+      (click)="select('generated')">
+      Generated
+    </button>
+    <button
+      type="button"
+      class="tabs__btn"
+      [class.is-active]="tab() === 'scanned'"
+      [attr.aria-pressed]="tab() === 'scanned'"
+      (click)="select('scanned')">
+      Scanned
+    </button>
+    <button
+      type="button"
+      class="tabs__clear"
+      (click)="clearAll()">
+      Clear {{ tab() }}
+    </button>
+  </nav>
+
+  @if (tab() === 'generated') {
+    <app-history-list
+      kind="generated"
+      [limit]="50"
+      [reloadKey]="bump()"
+      emptyHint="No generated codes yet — make one from the Generate page." />
+  } @else {
+    <app-history-list
+      kind="scanned"
+      [limit]="50"
+      [reloadKey]="bump()"
+      emptyHint="No scanned codes yet — open the Scan page to capture one." />
+  }
+</div>

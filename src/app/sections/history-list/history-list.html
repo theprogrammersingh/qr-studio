@@ -1,0 +1,30 @@
+@if (!loaded()) {
+  <p class="hist__loading">Loading…</p>
+}
+@else if (!hasItems()) {
+  <p class="hist__empty">{{ emptyHint() }}</p>
+}
+@else {
+  <ol class="hist">
+    @for (r of records(); track r.id) {
+      <li class="hist__item">
+        <div class="hist__row">
+          <time class="hist__time" [attr.datetime]="isoDate(r.createdAt)">
+            {{ formatDate(r.createdAt) }}
+          </time>
+          <span class="hist__type">{{ typeLabel(r.type) }}</span>
+        </div>
+
+        <p class="hist__payload">{{ snippet(r.payload) }}</p>
+
+        <div class="hist__actions">
+          @if (kind() === 'generated' && r.values) {
+            <button type="button" class="hist__btn" (click)="reuse(r)">Reopen</button>
+          }
+          <button type="button" class="hist__btn" (click)="copy(r.payload)">Copy</button>
+          <button type="button" class="hist__btn hist__btn--quiet" (click)="remove(r.id)">Delete</button>
+        </div>
+      </li>
+    }
+  </ol>
+}

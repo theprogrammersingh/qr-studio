@@ -1,0 +1,30 @@
+@if (pwa.updateReady()) {
+  <aside class="toast" role="status" aria-live="polite">
+    <p class="toast__title">A new version is ready.</p>
+    <p class="toast__body">Reload to get the latest QR Studio.</p>
+    <div class="toast__actions">
+      <button type="button" class="btn" (click)="pwa.applyUpdate()">Reload</button>
+    </div>
+  </aside>
+}
+
+@else if (pwa.canInstall()) {
+  <aside class="toast" role="status" aria-live="polite">
+    @if (pwa.isIos()) {
+      <p class="toast__title">Install QR Studio</p>
+      <p class="toast__body">
+        In Safari, tap the share button then “Add to Home Screen”.
+      </p>
+      <div class="toast__actions">
+        <button type="button" class="btn btn--ghost" (click)="pwa.dismiss()">Not now</button>
+      </div>
+    } @else {
+      <p class="toast__title">Install QR Studio</p>
+      <p class="toast__body">Add it to your home screen for one-tap launch.</p>
+      <div class="toast__actions">
+        <button type="button" class="btn btn--ghost" (click)="pwa.dismiss()">Not now</button>
+        <button type="button" class="btn" (click)="pwa.install()">Install</button>
+      </div>
+    }
+  </aside>
+}

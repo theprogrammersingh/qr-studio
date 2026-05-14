@@ -1,0 +1,82 @@
+<div class="container">
+  <header class="page-header">
+    <p class="page-header__crumbs">
+      <a routerLink="/">~/</a>
+      <span aria-hidden="true">/</span>
+      <span>generate</span>
+    </p>
+    <h1>Generate</h1>
+    <p class="page-header__lede">{{ typeMeta().description }}</p>
+  </header>
+
+  <section class="gen">
+    <div class="gen__col gen__col--form">
+      <h2 class="section-heading">
+        <span class="section-heading__hash">##</span> Type
+      </h2>
+      <app-qr-type-picker
+        [selected]="type()"
+        (typeChange)="onTypeChange($event)" />
+
+      <h2 class="section-heading">
+        <span class="section-heading__hash">##</span> Content
+      </h2>
+      <app-qr-form
+        [type]="typeMeta()"
+        [initial]="initialValues()"
+        (valuesChange)="onValuesChange($event)" />
+
+      <h2 class="section-heading">
+        <span class="section-heading__hash">##</span> Options
+      </h2>
+      <div class="gen__opts">
+        <div class="field">
+          <label class="field__label" for="ec">Error correction</label>
+          <select
+            id="ec"
+            class="field__select"
+            [value]="options().errorCorrectionLevel"
+            (change)="onErrorLevelChange($event)">
+            @for (l of errorLevels; track l.value) {
+              <option [value]="l.value">{{ l.label }}</option>
+            }
+          </select>
+          <p class="field__hint">Higher = more resilient, but denser code.</p>
+        </div>
+        <div class="field">
+          <label class="field__label" for="margin">Quiet zone</label>
+          <input
+            id="margin"
+            class="field__input"
+            type="number"
+            min="0" max="10"
+            [value]="options().margin"
+            (input)="onMarginChange($event)" />
+          <p class="field__hint">Modules of white space around the code.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="gen__col gen__col--preview">
+      <h2 class="section-heading">
+        <span class="section-heading__hash">##</span> Preview
+        <span class="section-heading__ext">// renders live as you type</span>
+      </h2>
+      <app-qr-preview
+        [payload]="payload()"
+        [options]="options()"
+        [filename]="'qr-' + type()" />
+
+      <div class="gen__save">
+        <button
+          type="button"
+          class="btn"
+          [disabled]="!canSave()"
+          (click)="save()">
+          {{ saved() ? 'Saved to history ✓' : 'Save to history' }}
+        </button>
+        <a routerLink="/history" class="see-more">See history →</a>
+      </div>
+    </div>
+  </section>
+</div>

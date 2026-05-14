@@ -1,0 +1,39 @@
+<header class="hdr" [class.is-open]="open()">
+  <div class="hdr__bar container">
+    <a routerLink="/" class="hdr__brand" aria-label="QR Studio — home">
+      <span class="hdr__brand-prompt">~/</span><span class="hdr__brand-name">qr</span>
+    </a>
+
+    <button
+      type="button"
+      class="hdr__toggle"
+      [attr.aria-expanded]="open()"
+      aria-controls="primary-nav"
+      [attr.aria-label]="open() ? 'Close menu' : 'Open menu'"
+      (click)="toggle()">
+      <span class="hdr__toggle-bar"></span>
+      <span class="hdr__toggle-bar"></span>
+      <span class="hdr__toggle-bar"></span>
+    </button>
+
+    <nav id="primary-nav" class="hdr__nav" aria-label="Primary">
+      <ul>
+        <li>
+          <a routerLink="/generate" routerLinkActive="is-active" (click)="close()">
+            Generate
+          </a>
+        </li>
+        <li>
+          <a routerLink="/scan" routerLinkActive="is-active" (click)="close()">
+            Scan
+          </a>
+        </li>
+        <li>
+          <a routerLink="/history" routerLinkActive="is-active" (click)="close()">
+            History
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

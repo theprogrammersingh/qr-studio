@@ -1,0 +1,109 @@
+:host { display: block; }
+
+.scan {
+  display: grid;
+  gap: 1rem;
+}
+
+.scan__stage {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  max-width: 32rem;
+  margin-inline: auto;
+  background: #000;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.scan__stage.is-hidden { display: none; }
+
+.scan__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Faux reticle — sits above the highlighter the lib draws. */
+.scan__reticle {
+  position: absolute;
+  inset: 16%;
+  border: 1px dashed color-mix(in oklab, var(--accent) 75%, transparent);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.scan__live {
+  position: absolute;
+  inset-block-start: 0.5rem;
+  inset-inline-start: 0.5rem;
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  background: color-mix(in oklab, var(--bg) 70%, transparent);
+  color: var(--fg);
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.scan__error {
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  color: var(--keyword);
+  border: 1px dashed var(--keyword);
+  padding: 0.6rem 0.85rem;
+  border-radius: 4px;
+  margin: 0;
+}
+
+.scan__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
+.scan__control { flex: 1 1 12rem; min-width: 0; }
+
+.scan__result {
+  border: 1px solid var(--line);
+  border-block-start: 2px solid var(--accent);
+  background: var(--bg-elev);
+  padding: 1rem 1.1rem;
+  border-radius: 4px;
+}
+.scan__result-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-family: var(--mono);
+  font-size: var(--step--1);
+}
+.scan__type {
+  margin: 0;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+.scan__saved {
+  margin: 0 0 0 auto;
+  color: var(--fg-mute);
+}
+.scan__payload {
+  margin-block: 0.5rem 0.75rem;
+  font-family: var(--mono);
+  font-size: var(--step-0);
+  color: var(--fg);
+  word-break: break-word;
+  white-space: pre-wrap;
+  max-width: none;
+}
+.scan__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+@media (min-width: 36rem) {
+  .scan__controls { justify-content: flex-start; }
+}

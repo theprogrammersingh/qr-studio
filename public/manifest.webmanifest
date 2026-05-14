@@ -1,0 +1,26 @@
+{
+  "name": "QR Studio",
+  "short_name": "QR Studio",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "orientation": "natural",
+  "background_color": "#0d0f14",
+  "theme_color": "#0d0f14",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["utilities", "productivity"],
+  "description": "Generate and scan QR codes — text, URLs, Wi-Fi, vCards and more. Recent items stay on your device.",
+  "icons": [
+    { "src": "/icons/icon.svg",          "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icons/icon-maskable.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" },
+    { "src": "/icons/apple-touch-icon.svg", "sizes": "180x180", "type": "image/svg+xml" }
+  ],
+  "shortcuts": [
+    { "name": "Generate", "short_name": "Generate", "url": "/generate", "description": "Create a new QR code" },
+    { "name": "Scan",     "short_name": "Scan",     "url": "/scan",     "description": "Scan a QR code" },
+    { "name": "History",  "short_name": "History",  "url": "/history",  "description": "Recent QR codes" }
+  ]
+}

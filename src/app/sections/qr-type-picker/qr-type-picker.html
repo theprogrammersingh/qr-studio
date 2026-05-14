@@ -1,0 +1,16 @@
+<nav class="picker" aria-label="QR code type">
+  <ul class="picker__list">
+    @for (t of types; track t.id) {
+      <li>
+        <button
+          type="button"
+          class="picker__chip"
+          [class.is-selected]="selected() === t.id"
+          [attr.aria-pressed]="selected() === t.id"
+          (click)="pick(t.id)">
+          {{ t.label }}
+        </button>
+      </li>
+    }
+  </ul>
+</nav>

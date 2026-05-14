@@ -1,0 +1,38 @@
+:host { display: block; }
+
+.hero { padding-block-start: clamp(2rem, 6vw, 4rem); }
+
+.hero__title {
+  font-size: var(--step-5);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  display: inline-flex;
+  align-items: baseline;
+}
+.hero__prompt { color: var(--accent); margin-inline-end: 0.05em; }
+.hero__cursor {
+  display: inline-block;
+  margin-inline-start: 0.1em;
+  color: var(--accent);
+  font-weight: 400;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero__cursor { animation: blink 1.05s steps(1, end) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+}
+
+.hero__lede {
+  margin-block-start: 1rem;
+  font-family: var(--sans);
+  font-size: var(--step-1);
+  color: var(--fg-soft);
+  max-width: 50ch;
+}
+
+.hero__cta {
+  margin-block-start: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

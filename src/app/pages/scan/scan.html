@@ -1,0 +1,74 @@
+<div class="container">
+  <header class="page-header">
+    <p class="page-header__crumbs">
+      <a routerLink="/">~/</a>
+      <span aria-hidden="true">/</span>
+      <span>scan</span>
+    </p>
+    <h1>Scan</h1>
+    <p class="page-header__lede">
+      Point the camera at a QR code. Decoded codes are saved to history on this device.
+    </p>
+  </header>
+
+  <section class="scan">
+    <div class="scan__stage" [class.is-hidden]="!supported()">
+      <video #video class="scan__video" muted playsinline></video>
+      <div class="scan__reticle" aria-hidden="true"></div>
+      @if (running()) {
+        <span class="scan__live"><span class="status-dot"></span>scanning</span>
+      }
+    </div>
+
+    @if (error()) {
+      <p class="scan__error" role="alert">{{ error() }}</p>
+    }
+
+    <div class="scan__controls">
+      @if (supported() && cameras().length > 1) {
+        <label class="scan__control">
+          <span class="sr-only">Camera</span>
+          <select class="field__select" (change)="setCamera($event)">
+            @for (c of cameras(); track c.id) {
+              <option [value]="c.id">{{ c.label || ('Camera ' + ($index + 1)) }}</option>
+            }
+          </select>
+        </label>
+      }
+      @if (hasFlash()) {
+        <button type="button" class="btn btn--ghost" (click)="toggleFlash()">Flash</button>
+      }
+      @if (running()) {
+        <button type="button" class="btn btn--ghost" (click)="stop()">Stop camera</button>
+      } @else if (supported()) {
+        <button type="button" class="btn" (click)="start()">Start camera</button>
+      }
+      <button type="button" class="btn btn--ghost" (click)="pickFile()">Scan from image</button>
+      <input
+        #fileInput
+        type="file"
+        accept="image/*"
+        class="sr-only"
+        (change)="onFile($event)" />
+    </div>
+
+    @if (hasResult()) {
+      <article class="scan__result">
+        <header class="scan__result-row">
+          <p class="scan__type">{{ result()!.typeLabel }}</p>
+          @if (savedAt()) {
+            <p class="scan__saved"><span class="status-dot"></span>saved to history</p>
+          }
+        </header>
+        <p class="scan__payload">{{ result()!.text }}</p>
+        <div class="scan__actions">
+          @if (result()!.link) {
+            <a class="btn" [href]="result()!.link" target="_blank" rel="noopener">Open</a>
+          }
+          <button type="button" class="btn btn--ghost" (click)="copy(result()!.text)">Copy</button>
+          <button type="button" class="btn btn--ghost" (click)="scanAgain()">Scan again</button>
+        </div>
+      </article>
+    }
+  </section>
+</div>

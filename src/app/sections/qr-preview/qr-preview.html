@@ -1,0 +1,33 @@
+<div class="prev">
+  <div class="prev__stage" [class.is-empty]="!hasPayload()">
+    @if (hasPayload()) {
+      <div class="prev__svg" [innerHTML]="safeSvg()"></div>
+    } @else {
+      <p class="prev__placeholder">Fill in the form to see your QR code.</p>
+    }
+  </div>
+
+  <div class="prev__actions">
+    <button
+      type="button"
+      class="btn"
+      [disabled]="!hasPayload()"
+      (click)="downloadSvg()">
+      Download SVG
+    </button>
+    <button
+      type="button"
+      class="btn btn--ghost"
+      [disabled]="!hasPayload()"
+      (click)="downloadPng()">
+      Download PNG
+    </button>
+    <button
+      type="button"
+      class="btn btn--ghost"
+      [disabled]="!hasPayload()"
+      (click)="copyPayload()">
+      Copy payload
+    </button>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<form class="qrf" (submit)="$event.preventDefault()" autocomplete="off">
+  @for (f of type().fields; track f.name) {
+    <div class="field">
+      <label class="field__label" [for]="fieldId(f.name)">
+        {{ f.label }}
+        @if (f.required) { <span class="req" aria-hidden="true">*</span> }
+      </label>
+
+      @switch (f.kind) {
+        @case ('textarea') {
+          <textarea
+            class="field__textarea"
+            [id]="fieldId(f.name)"
+            [name]="f.name"
+            [placeholder]="f.placeholder ?? ''"
+            [required]="!!f.required"
+            [attr.maxlength]="f.maxLength ?? null"
+            [value]="values()[f.name]"
+            (input)="onInput(f.name, $event)"></textarea>
+        }
+        @case ('select') {
+          <select
+            class="field__select"
+            [id]="fieldId(f.name)"
+            [name]="f.name"
+            [required]="!!f.required"
+            [value]="values()[f.name]"
+            (change)="onInput(f.name, $event)">
+            @for (o of (f.options ?? []); track o.value) {
+              <option [value]="o.value">{{ o.label }}</option>
+            }
+          </select>
+        }
+        @default {
+          <input
+            class="field__input"
+            [id]="fieldId(f.name)"
+            [name]="f.name"
+            [type]="f.kind"
+            [placeholder]="f.placeholder ?? ''"
+            [required]="!!f.required"
+            [value]="values()[f.name]"
+            (input)="onInput(f.name, $event)" />
+        }
+      }
+
+      @if (f.hint) { <p class="field__hint">{{ f.hint }}</p> }
+    </div>
+  }
+</form>

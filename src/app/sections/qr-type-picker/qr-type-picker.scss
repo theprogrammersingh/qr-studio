@@ -1,0 +1,30 @@
+:host { display: block; }
+
+.picker__list {
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  padding-block-end: 0.25rem;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+.picker__list > li { flex: 0 0 auto; }
+
+.picker__chip {
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.02em;
+  color: var(--fg-soft);
+  background: transparent;
+  border: 1px solid var(--line);
+  padding: 0.45rem 0.85rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease, background-color .18s ease;
+}
+.picker__chip:hover { color: var(--accent); border-color: var(--accent); }
+.picker__chip.is-selected {
+  color: var(--bg);
+  background: var(--accent);
+  border-color: var(--accent);
+}

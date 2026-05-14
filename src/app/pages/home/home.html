@@ -1,0 +1,48 @@
+<div class="container">
+  <section class="section hero">
+    <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span>on-device · works offline</p>
+    <h1 class="hero__title">
+      <span class="hero__prompt">~/</span>qr<span class="hero__cursor" aria-hidden="true">▍</span>
+    </h1>
+    <p class="hero__lede">
+      Generate and scan QR codes for text, URLs, Wi-Fi, contacts, calendar events and more.
+      Recent codes are kept on your device — nothing leaves the browser.
+    </p>
+
+    <div class="hero__cta">
+      <a routerLink="/generate" class="btn">Generate a code</a>
+      <a routerLink="/scan" class="btn btn--ghost">Scan a code</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-heading">
+      <span class="section-heading__hash">##</span> Types
+      <span class="section-heading__ext">// nine encodings, all in one form</span>
+    </h2>
+
+    <ul class="cards">
+      @for (t of types; track t.id) {
+        <li>
+          <a class="card" [routerLink]="['/generate', t.id]">
+            <p class="card__eyebrow">{{ t.id }}</p>
+            <p class="card__title">{{ t.label }}</p>
+            <p class="card__desc">{{ t.description }}</p>
+          </a>
+        </li>
+      }
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2 class="section-heading">
+      <span class="section-heading__hash">##</span> How it works
+    </h2>
+    <ul class="bullets prose">
+      <li>QR generation runs in your browser via the <code>qrcode</code> library — no server round-trip.</li>
+      <li>Scanning uses the device camera and decodes locally; payloads never leave the page.</li>
+      <li>Recently generated and scanned codes are persisted in IndexedDB on this device only.</li>
+      <li>Install it from the address bar to use offline.</li>
+    </ul>
+  </section>
+</div>
