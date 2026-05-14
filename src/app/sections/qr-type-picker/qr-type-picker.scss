@@ -1,13 +1,22 @@
 :host { display: block; }
 
+.picker {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+
 .picker__list {
   display: flex;
   gap: 0.4rem;
   overflow-x: auto;
   padding-block-end: 0.25rem;
-  scrollbar-width: thin;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
 }
+.picker__list::-webkit-scrollbar { width: 0; height: 0; display: none; }
 .picker__list > li { flex: 0 0 auto; }
 
 .picker__chip {
@@ -27,4 +36,39 @@
   color: var(--bg);
   background: var(--accent);
   border-color: var(--accent);
+}
+
+.picker__nav {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  padding: 0;
+  border: none;
+  color: var(--fg-soft);
+  cursor: pointer;
+  transition: opacity .15s ease, color .15s ease;
+}
+.picker__nav:hover { color: var(--accent); }
+.picker__nav--left {
+  left: 0;
+  justify-content: flex-start;
+  background: linear-gradient(to right, var(--bg) 55%, transparent);
+}
+.picker__nav--right {
+  right: 0;
+  justify-content: flex-end;
+  background: linear-gradient(to left, var(--bg) 55%, transparent);
+}
+.picker__nav.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.picker__nav svg {
+  width: 14px;
+  height: 14px;
 }

@@ -1,5 +1,18 @@
 <nav class="picker" aria-label="QR code type">
-  <ul class="picker__list">
+  <button
+    type="button"
+    class="picker__nav picker__nav--left"
+    [class.is-hidden]="!canScrollLeft()"
+    [attr.aria-hidden]="!canScrollLeft()"
+    [disabled]="!canScrollLeft()"
+    aria-label="Scroll left"
+    (click)="scroll(-1)">
+    <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+      <path d="M10 2 L4 8 L10 14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <ul #list class="picker__list" (scroll)="onScroll()">
     @for (t of types; track t.id) {
       <li>
         <button
@@ -13,4 +26,17 @@
       </li>
     }
   </ul>
+
+  <button
+    type="button"
+    class="picker__nav picker__nav--right"
+    [class.is-hidden]="!canScrollRight()"
+    [attr.aria-hidden]="!canScrollRight()"
+    [disabled]="!canScrollRight()"
+    aria-label="Scroll right"
+    (click)="scroll(1)">
+    <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+      <path d="M6 2 L12 8 L6 14" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
 </nav>
